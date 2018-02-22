@@ -1,19 +1,18 @@
 
-#include "stdafx.h"
 #include <iostream>
 using namespace std;
-class Ves {
+class ConvertVes {
 	double kilo;
 public:
-	Ves(double _massa = 0)
+	ConvertVes(double _massa = 0)
 	{
 		kilo = _massa;
 	}
-	void setmassa(double _kilo)
+	void SetMassa(double _kilo)
 	{
 		kilo = _kilo;
 	}
-	double getmassa() const
+	double GetMassa()
 	{
 		return kilo;
 	}
@@ -45,7 +44,7 @@ public:
 
 void main()
 {
-	Ves A;
+	ConvertVes A;
 	double n;
 	cout << "Vvedite massu" << endl;
 	cin >> n;
