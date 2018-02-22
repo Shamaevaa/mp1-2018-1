@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 class ConvertVes {
@@ -8,11 +7,11 @@ public:
 	{
 		kilo = _massa;
 	}
-	void SetMassa(double _kilo)
+	void Setmassa(double _kilo)
 	{
 		kilo = _kilo;
 	}
-	double GetMassa()
+	double Getmassa()
 	{
 		return kilo;
 	}
@@ -35,20 +34,19 @@ public:
 		cout << "Massa v pudah= " << ConvertToPood() << endl;
 		cout << "Massa v unciyah= " << ConvertToUnciya() << endl;
 	}
-	Ves& operator=(const Ves& op2)
+	ConvertVes & operator=(const ConvertVes& op2)
 	{
 		kilo = op2.kilo;
 		return *this;
 	}
 };
-
 void main()
 {
 	ConvertVes A;
 	double n;
 	cout << "Vvedite massu" << endl;
 	cin >> n;
-	A.setmassa(n);
+	A.Setmassa(n);
 	A.Print();
+	system("pause");
 }
-
