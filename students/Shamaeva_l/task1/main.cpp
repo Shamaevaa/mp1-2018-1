@@ -1,5 +1,5 @@
-#include <iostream> 
 #include "stdafx.h"
+#include <iostream> 
 using namespace std;
 class ConvertVes {
 	double kilo;
@@ -30,19 +30,19 @@ public:
 	}
 	void Print()
 	{
-		cout « "Massa v kg= " « kilo « endl;
+		cout << "Massa v kg= " << kilo << endl;
 	}
 	void Print1()
 	{
-		cout « "Massa v funtah= " « ConvertToFunt() « endl;
+		cout << "Massa v funtah= " << ConvertToFunt() << endl;
 	}
 	void Print2()
 	{
-		cout « "Massa v pudah= " « ConvertToPood() « endl;
+		cout << "Massa v pudah= " << ConvertToPood() << endl;
 	}
 	void Print3()
 	{
-		cout « "Massa v unciyah= " « ConvertToUnciya() « endl;
+		cout << "Massa v unciyah= " << ConvertToUnciya() << endl;
 	}
 	ConvertVes & operator=(const ConvertVes& op2)
 	{
@@ -54,8 +54,8 @@ void main()
 {
 	ConvertVes A;
 	double n;
-	cout « "Vvedite massu" « endl;
-	cin » n;
+	cout << "Vvedite massu" << endl;
+	cin >> n;
 	A.SetMassa(n);
 	A.Print();
 	A.Print1();
