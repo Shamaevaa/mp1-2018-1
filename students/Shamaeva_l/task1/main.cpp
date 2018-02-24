@@ -1,19 +1,18 @@
-
+#include <iostream> 
 #include "stdafx.h"
-#include <iostream>
 using namespace std;
-class Ves {
+class ConvertVes {
 	double kilo;
 public:
-	Ves(double _massa = 0)
+	ConvertVes(double _massa = 0)
 	{
 		kilo = _massa;
 	}
-	void setmassa(double _kilo)
+	void SetMassa(double _kilo)
 	{
 		kilo = _kilo;
 	}
-	double getmassa() const
+	double GetMassa()
 	{
 		return kilo;
 	}
@@ -31,25 +30,36 @@ public:
 	}
 	void Print()
 	{
-		cout << "Massa v kg= " << kilo << endl;
-		cout << "Massa v funtah= " << ConvertToFunt() << endl;
-		cout << "Massa v pudah= " << ConvertToPood() << endl;
-		cout << "Massa v unciyah= " << ConvertToUnciya() << endl;
+		cout « "Massa v kg= " « kilo « endl;
 	}
-	Ves& operator=(const Ves& op2)
+	void Print1()
+	{
+		cout « "Massa v funtah= " « ConvertToFunt() « endl;
+	}
+	void Print2()
+	{
+		cout « "Massa v pudah= " « ConvertToPood() « endl;
+	}
+	void Print3()
+	{
+		cout « "Massa v unciyah= " « ConvertToUnciya() « endl;
+	}
+	ConvertVes & operator=(const ConvertVes& op2)
 	{
 		kilo = op2.kilo;
 		return *this;
 	}
 };
-
 void main()
 {
-	Ves A;
+	ConvertVes A;
 	double n;
-	cout << "Vvedite massu" << endl;
-	cin >> n;
-	A.setmassa(n);
+	cout « "Vvedite massu" « endl;
+	cin » n;
+	A.SetMassa(n);
 	A.Print();
+	A.Print1();
+	A.Print2();
+	A.Print3();
+	system("pause");
 }
-
