@@ -1,19 +1,20 @@
 #include <iostream> 
 #include <string> 
 #include <conio.h> 
-
+#include <cstdio>
 using namespace std;
 
 class String_
 {
 private:
-	string strings;
+	char* strings;
 	int ind;
+	int leng;
 	char ch;
 public:
-	String_() //Конструктор 
+	String_() //конструктор 
 	{
-		strings = " ";
+		strings = new char;
 	}
 
 	~String_() //Деструктор 
@@ -21,11 +22,10 @@ public:
 		//delete[] strings; 
 	}
 
-	void SetStr() //Введение новой строки 
+	void SetStr(char* a) //Введение новой строки 
 	{
-		cout << "Vvedite stroku: ";
-		cin >> strings;
-		if (strings.size() > 40)
+		int count = strlen(a);
+		if (strlen(a) > 40)
 		{
 			cout << "Stroka bolshe 40!";
 		}
@@ -33,11 +33,14 @@ public:
 		{
 			cout << "Stroka prinita! \n";
 		}
+		strings = a;
 	}
 
-	void LenStr() //Длина строки 
+	int LenStr() //Длина строки 
 	{
-		cout << "Dlina stroki: " << strings.size() << endl;
+		leng = strlen(strings);
+
+		return leng;
 	}
 
 	void IndStr() //Символ по индексу 
@@ -60,9 +63,9 @@ public:
 
 	bool PoliStr() //Проверка на полиндром 
 	{
-		for (int i = 0; i < strings.size() / 2; ++i)
+		for (int i = 0; i < strlen(strings) / 2; ++i)
 		{
-			if (strings[i] != strings[strings.size() - i - 1])
+			if (strings[i] != strings[strlen(strings) - i - 1])
 			{
 				//cout « "Stroka ne polindrom! \n"; 
 				return false;
@@ -76,7 +79,7 @@ public:
 		int i;
 		for (int i = fp - 1; i < fp + sp - 1; i++)
 		{
-			cout« strings[i];
+			cout << strings[i];
 		}
 
 	}
@@ -84,8 +87,8 @@ public:
 	{
 		int count = 0;
 		bool flag = false;
-		for (int i = 0; i < strings.size(); i++) {
-			for (int j = 0; j < strings.size(); j++) {
+		for (int i = 0; i < strlen(strings); i++) {
+			for (int j = 0; j < strlen(strings); j++) {
 				if (i != j)
 				{
 					if (strings[i] == strings[j]) flag = true;
@@ -95,7 +98,7 @@ public:
 				count++;
 			flag = false;
 		}
-		cout << "Simvolov : " << count « endl;
+		cout << "Simvolov : " << count << endl;
 	}
 
 };
@@ -103,13 +106,16 @@ public:
 int main()
 {
 	int fp, sp;
+	char * str = new char;
 	String_ obj1;
-	obj1.SetStr();
+	cout << "Vvedite stroku: ";
+	cin >> str;
+	obj1.SetStr(str);
+	cout << "Dlina stroki: " << obj1.LenStr() << endl;
 	obj1.LenStr();
 	obj1.IndStr();
 	obj1.PoliStr();
 	obj1.IndRepStr();
-	obj1.LatStr();
 	obj1.PoliStr();
 	cout << "VVedite kollicestvo: ";
 	cin >> sp;
@@ -118,11 +124,11 @@ int main()
 	obj1.subStr(fp, sp);
 	if (obj1.PoliStr())
 	{
-		cout << "Stroka polindrom.";
+		cout << "Stroka polindrom." << endl;
 	}
 	else
 	{
-		cout << "Stroka ne polindrom";
+		cout << "Stroka ne polindrom" << endl;
 	}
 	system("pause");
 	return 0;
