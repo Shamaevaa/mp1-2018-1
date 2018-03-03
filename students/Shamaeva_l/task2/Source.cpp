@@ -74,7 +74,7 @@ public:
 	void subStr(int fp, int sp) // Выделение подстроки
 	{
 		int i;
-		for (int i = fp-1; i < fp+sp-1; i++)
+		for (int i = fp - 1; i < fp + sp - 1; i++)
 		{
 			cout« strings[i];
 		}
