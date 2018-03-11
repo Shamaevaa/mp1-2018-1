@@ -1,136 +1,211 @@
 #include <iostream> 
 #include <string> 
-#include <conio.h> 
-#include <cstdio>
+#include <math.h> 
 using namespace std;
-
-class String_
+class Teilor
 {
-private:
-	char* strings;
-	int ind;
-	int leng;
-	char ch;
+	int n;
+	int function;
+	double x;
 public:
-	String_() //конструктор 
+	Teilor(int _n = 0, double _x = 0)
 	{
-		strings = new char;
+		n = _n;
+		x = _x;
 	}
 
-	~String_() //Деструктор 
+	~Teilor()
 	{
-		//delete[] strings; 
 	}
 
-	void SetStr(char* a) //Введение новой строки 
+	void SetCount(int _n)
 	{
-		int count = strlen(a);
-		if (strlen(a) > 40)
+		n = _n;
+	}
+
+	void SetFunction(int f)
+	{
+		function = f;
+	}
+
+	void SetPoint(double _x)
+	{
+		x = _x;
+	}
+
+	void Print()
+	{
+		if (function == 1)
 		{
-			cout << "Stroka bolshe 40!";
-		}
-		else
-		{
-			cout << "Stroka prinita! \n";
-		}
-		strings = a;
-	}
-
-	int LenStr() //Длина строки 
-	{
-		leng = strlen(strings);
-
-		return leng;
-	}
-
-	void IndStr() //Символ по индексу 
-	{
-		cout << "Vvedite indeks: ";
-		cin >> ind;
-		cout << "Simvol: " << strings[ind - 1] << endl;
-	}
-
-	void IndRepStr() //Замена символа по индексу 
-	{
-		cout << "Vvedite indeks: ";
-		cin >> ind;
-		cout << "Vvedite simvol: ";
-		cin >> ch;
-		strings[ind - 1] = ch;
-		cout << " New Stroka: " << strings << endl;
-	}
-
-
-	bool PoliStr() //Проверка на полиндром 
-	{
-		for (int i = 0; i < strlen(strings) / 2; ++i)
-		{
-			if (strings[i] != strings[strlen(strings) - i - 1])
+			cout << "x";
+			for (int i = 3, k = 0; i <= n; i++, i++, k++)
 			{
-				//cout « "Stroka ne polindrom! \n"; 
-				return false;
+				if (k % 2 == 0)
+					cout << "-";
+				else
+					cout << "+";
+				cout << "x^(" << i << ")/" << i << "!";
 			}
+			cout << endl;
 		}
-		return true;
-	}
-
-	void subStr(int fp, int sp) // Выделение подстроки
-	{
-		int i;
-		for (int i = fp - 1; i < fp + sp - 1; i++)
+		if (function == 2)
 		{
-			cout << strings[i];
-		}
-
-	}
-	void LatStr() // Нахождение символов латинского алфавита 
-	{
-		int count = 0;
-		bool flag = false;
-		for (int i = 0; i < strlen(strings); i++) {
-			for (int j = 0; j < strlen(strings); j++) {
-				if (i != j)
-				{
-					if (strings[i] == strings[j]) flag = true;
-				}
+			cout << "1";
+			for (int i = 2, k = 0; i <= n; i++, i++, k++)
+			{
+				if (k % 2 == 0)
+					cout << "-";
+				else
+					cout << "+";
+				cout << "x^(" << i << ")/" << i << "!";
 			}
-			if (flag == false)
-				count++;
-			flag = false;
+			cout << endl;
 		}
-		cout << "Simvolov : " << count << endl;
+		if (function == 3)
+		{
+			cout << "1+x";
+			for (int i = 2; i <= n; i++)
+			{
+				cout << "+x^(" << i << ")/" << i << "!";
+			}
+			cout << endl;
+		}
 	}
 
-};
 
+	double Member(int k)
+	{
+		double step;
+		if (function == 1)
+		{
+			if (k % 2 == 0)
+				return 0;
+			else
+			{
+				step = x;
+				for (int i = 3; i <= k; i++, i++)
+					step *= ((-1)*x*x / (i*(i - 1)));
+				return step;
+			}
+		}
+		if (function == 2)
+		{
+			if (k % 2 == 1)
+				return 0;
+			else
+			{
+				step = 1;
+				for (int i = 2; i <= k; i++, i++)
+					step *= ((-1)*x*x / (i*(i - 1)));
+				return step;
+			}
+		}
+		if (function == 3)
+		{
+			step = 1;
+			for (int i = 1; i <= k; i++)
+				step *= (x / i);
+			return step;
+		}
+	}
+
+	void Sravnenie()
+	{
+		if (function == 1)
+		{
+			cout << "Raznica= " << sin(x) - Sin() << endl;
+		}
+		if (function == 2)
+		{
+			cout << "Raznica= " << cos(x) - Cos() << endl;
+		}
+		if (function == 3)
+		{
+			cout << "Raznica= " << exp(x) - Exp() << endl;
+		}
+	}
+
+	int GetCount(void)
+	{
+		return n;
+	}
+
+	double GetPoint(void)
+	{
+		return x;
+	}
+
+
+	double Result()
+	{
+		if (function == 1)
+			return Sin();
+		if (function == 2)
+			return Cos();
+		if (function == 3)
+			return Exp();
+	}
+	double Sin()
+	{
+		double step = x;
+		double sum = x;
+		for (int i = 3; i <= n; i++, i++)
+		{
+			step *= ((-1)*x*x / (i*(i - 1)));
+			sum += step;
+		}
+		return sum;
+
+	}
+
+	double Cos()
+	{
+		double step = 1;
+		double sum = 1;
+		for (int i = 2; i <= n; i++, i++)
+		{
+			step *= ((-1)*x*x / (i*(i - 1)));
+			sum += step;
+		}
+		return sum;
+
+	}
+	double Exp()
+	{
+		double step = 1;
+		double sum = 1;
+		for (int i = 1; i <= n; i++)
+		{
+			step *= (x / i);
+			sum += step;
+		}
+		return sum;
+	}
+};
 int main()
 {
-	int fp, sp;
-	char * str = new char;
-	String_ obj1;
-	cout << "Vvedite stroku: ";
-	cin >> str;
-	obj1.SetStr(str);
-	cout << "Dlina stroki: " << obj1.LenStr() << endl;
-	obj1.LenStr();
-	obj1.IndStr();
-	obj1.PoliStr();
-	obj1.IndRepStr();
-	obj1.PoliStr();
-	cout << "VVedite kollicestvo: ";
-	cin >> sp;
-	cout << "VVedite indeks: ";
-	cin >> fp;
-	obj1.subStr(fp, sp);
-	if (obj1.PoliStr())
-	{
-		cout << "Stroka polindrom." << endl;
-	}
-	else
-	{
-		cout << "Stroka ne polindrom" << endl;
-	}
+	Teilor obj1;
+	int n = 0, x = 0, f, c;
+	cout << "Vvedite kolichestvo chlenov:" << endl;
+	cin >> n;
+	obj1.SetCount(n);
+	cout << "Vvedite tochku x:" << endl;
+	cin >> x;
+	obj1.SetPoint(x);
+	cout << "Viberite funkciyu:" << endl;
+	cout << "1.Sin(x)" << endl;
+	cout << "2.Cos(x)" << endl;
+	cout << "3.Exp(x)" << endl;
+	cin >> f;
+	obj1.SetFunction(f);
+	cout << "Resultat" << endl;
+	cout << obj1.Result() << endl;
+	cout << "Sravnim s etalonom" << endl;
+	obj1.Sravnenie();
+	cout << "Vvedite shlen, kotoriy hotite vichislit:'" << endl;
+	cin >> c;
+	cout << c << "Shlen=" << obj1.Member(c) << endl;
+	cout << "Formula:" << endl;
+	obj1.Print();
 	system("pause");
-	return 0;
-
 }
