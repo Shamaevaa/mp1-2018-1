@@ -1,22 +1,22 @@
 #include <iostream>
 #include <math.h> 
 using namespace std;
-class Teilor
+class TeilorSeries
 {
 	int n;
 	int function;
 	double x;
 public:
-	Teilor(int _n = 0, double _x = 0, int _function = 0)
+	TeilorSeries(int _n = 0, double _x = 0, int _function = 0)
 	{
 		n = _n;
 		x = _x;
 		function = _function;
 	}
-	~Teilor()
+	~TeilorSeries()
 	{
 	}
-	Teilor& operator=(const Teilor& ob)
+	TeilorSeries& operator=(const TeilorSeries& ob)
 	{
 		n = ob.n;
 		x = ob.x;
@@ -81,7 +81,7 @@ public:
 		}
 		}
 	}
-	double Member(int k)
+	double GetMemberOfSeries(int k)
 	{
 		double step;
 		switch (function)
@@ -124,24 +124,24 @@ public:
 		}
 		}
 	}
-	void Sravnenie()
+	void Comparison()
 	{
 		switch (function)
 		{
 		case 1:
 		{
-			cout << "Raznica= " << sin(x) - Result() << endl;
+			cout << "Raznica= " << sin(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		case 2:
 		{
-			cout << "Raznica= " << cos(x) - Result() << endl;
+			cout << "Raznica= " << cos(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		case 3:
 
 		{
-			cout << "Raznica= " << exp(x) - Result() << endl;
+			cout << "Raznica= " << exp(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		}
@@ -154,7 +154,7 @@ public:
 	{
 		return x;
 	}
-	double Result()
+	double ResultOfFunctionEvaluation()
 	{
 		switch (function)
 		{
@@ -201,7 +201,7 @@ public:
 int main()
 {
 	int n = 0, x = 0, f, c;
-	Teilor obj1;
+	TeilorSeries obj1;
 	cout << "Vvedite kolichestvo chlenov:" << endl;
 	cin >> n;
 	obj1.SetCount(n);
@@ -215,12 +215,12 @@ int main()
 	cin >> f;
 	obj1.SetFunction(f);
 	cout << "Resultat" << endl;
-	cout << obj1.Result() << endl;
+	cout << obj1.ResultOfFunctionEvaluation() << endl;
 	cout << "Sravnim s etalonom" << endl;
-	obj1.Sravnenie();
+	obj1.Comparison();
 	cout << "Vvedite shlen, kotoriy hotite vichislit:'" << endl;
 	cin >> c;
-	cout << c << "Shlen=" << obj1.Member(c) << endl;
+	cout << c << "Shlen=" << obj1.GetMemberOfSeries(c) << endl;
 	cout << "Formula:" << endl;
 	obj1.Print();
 	system("pause");
