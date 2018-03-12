@@ -1,5 +1,4 @@
-#include <iostream> 
-#include <string> 
+#include <iostream>
 #include <math.h> 
 using namespace std;
 class Teilor
@@ -8,75 +7,87 @@ class Teilor
 	int function;
 	double x;
 public:
-	Teilor(int _n = 0, double _x = 0)
+	Teilor(int _n = 0, double _x = 0, int _function = 0)
 	{
 		n = _n;
 		x = _x;
+		function = _function;
 	}
-
 	~Teilor()
 	{
 	}
-
+	Teilor& operator=(const Teilor& ob)
+	{
+		n = ob.n;
+		x = ob.x;
+		function = ob.function;
+		return *this;
+	}
 	void SetCount(int _n)
 	{
 		n = _n;
 	}
-
 	void SetFunction(int f)
 	{
 		function = f;
 	}
-
 	void SetPoint(double _x)
 	{
 		x = _x;
 	}
-
 	void Print()
 	{
-		if (function == 1)
+		switch (function)
+		{
+		case 1:
+
 		{
 			cout << "x";
-			for (int i = 3, k = 0; i <= n; i++, i++, k++)
+			for (int i = 2; i <= n; i++)
 			{
-				if (k % 2 == 0)
+				if (i % 2 == 0)
 					cout << "-";
 				else
 					cout << "+";
-				cout << "x^(" << i << ")/" << i << "!";
+				cout << "x^" << (2 * i - 1) << "/" << (2 * i - 1) << "!";
 			}
 			cout << endl;
+			break;
 		}
-		if (function == 2)
+		case 2:
+
+		{
+			cout << "1+x^2/2!";
+			for (int i = 2; i < n; i++)
+			{
+				if (i % 2 == 0)
+					cout << "-";
+				else
+					cout << "+";
+				cout << "x^" << 2 * i << "/" << 2 * i << "!";
+			}
+			cout << endl;
+			break;
+		}
+		case 3:
 		{
 			cout << "1";
-			for (int i = 2, k = 0; i <= n; i++, i++, k++)
-			{
-				if (k % 2 == 0)
-					cout << "-";
-				else
-					cout << "+";
-				cout << "x^(" << i << ")/" << i << "!";
-			}
-			cout << endl;
-		}
-		if (function == 3)
-		{
-			cout << "1+x";
-			for (int i = 2; i <= n; i++)
+			for (int i = 1; i < n; i++)
 			{
 				cout << "+x^(" << i << ")/" << i << "!";
 			}
 			cout << endl;
+			break;
+		}
 		}
 	}
-
-
 	double Member(int k)
 	{
 		double step;
-		if (function == 1)
+		switch (function)
+		{
+		case 1:
+
 		{
 			if (k % 2 == 0)
 				return 0;
@@ -86,9 +97,10 @@ public:
 				for (int i = 3; i <= k; i++, i++)
 					step *= ((-1)*x*x / (i*(i - 1)));
 				return step;
+				break;
 			}
 		}
-		if (function == 2)
+		case 2:
 		{
 			if (k % 2 == 1)
 				return 0;
@@ -98,94 +110,98 @@ public:
 				for (int i = 2; i <= k; i++, i++)
 					step *= ((-1)*x*x / (i*(i - 1)));
 				return step;
+				break;
 			}
 		}
-		if (function == 3)
+		case 3:
+
 		{
 			step = 1;
 			for (int i = 1; i <= k; i++)
 				step *= (x / i);
 			return step;
+			break;
+		}
 		}
 	}
-
 	void Sravnenie()
 	{
-		if (function == 1)
+		switch (function)
 		{
-			cout << "Raznica= " << sin(x) - Sin() << endl;
+		case 1:
+		{
+			cout << "Raznica= " << sin(x) - Result() << endl;
+			break;
 		}
-		if (function == 2)
+		case 2:
 		{
-			cout << "Raznica= " << cos(x) - Cos() << endl;
+			cout << "Raznica= " << cos(x) - Result() << endl;
+			break;
 		}
-		if (function == 3)
+		case 3:
+
 		{
-			cout << "Raznica= " << exp(x) - Exp() << endl;
+			cout << "Raznica= " << exp(x) - Result() << endl;
+			break;
+		}
 		}
 	}
-
 	int GetCount(void)
 	{
 		return n;
 	}
-
 	double GetPoint(void)
 	{
 		return x;
 	}
-
-
 	double Result()
 	{
-		if (function == 1)
-			return Sin();
-		if (function == 2)
-			return Cos();
-		if (function == 3)
-			return Exp();
-	}
-	double Sin()
-	{
-		double step = x;
-		double sum = x;
-		for (int i = 3; i <= n; i++, i++)
+		switch (function)
 		{
-			step *= ((-1)*x*x / (i*(i - 1)));
-			sum += step;
-		}
-		return sum;
-
-	}
-
-	double Cos()
-	{
-		double step = 1;
-		double sum = 1;
-		for (int i = 2; i <= n; i++, i++)
+		case 1:
 		{
-			step *= ((-1)*x*x / (i*(i - 1)));
-			sum += step;
+			double step = x;
+			double sum = x;
+			for (int i = 3; i <= n; i++, i++)
+			{
+				step *= ((-1)*x*x / (i*(i - 1)));
+				sum += step;
+			}
+			return sum;
+			break;
 		}
-		return sum;
 
-	}
-	double Exp()
-	{
-		double step = 1;
-		double sum = 1;
-		for (int i = 1; i <= n; i++)
+		case 2:
 		{
-			step *= (x / i);
-			sum += step;
+			double step = 1;
+			double sum = 1;
+			for (int i = 2; i <= n; i++, i++)
+			{
+				step *= ((-1)*x*x / (i*(i - 1)));
+				sum += step;
+			}
+			return sum;
+			break;
 		}
-		return sum;
+		case 3:
+		{
+			double step = 1;
+			double sum = 1;
+			for (int i = 1; i <= n; i++)
+			{
+				step *= (x / i);
+				sum += step;
+			}
+			return sum;
+			break;
+		}
+		}
 	}
 };
 int main()
 {
-	Teilor obj1;
 	int n = 0, x = 0, f, c;
+	Teilor obj1;
 	cout << "Vvedite kolichestvo chlenov:" << endl;
 	cin >> n;
 	obj1.SetCount(n);
