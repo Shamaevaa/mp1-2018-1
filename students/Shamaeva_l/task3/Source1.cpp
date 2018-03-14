@@ -1,39 +1,57 @@
 #include <iostream>
 #include <math.h> 
 using namespace std;
-class TeilorSeries
+class TaylorSeries
 {
 	int n;
 	int function;
 	double x;
 public:
-	TeilorSeries(int _n = 0, double _x = 0, int _function = 0)
+	TaylorSeries(int _n = 0, double _x = 0, int _function = 0)
 	{
 		n = _n;
 		x = _x;
 		function = _function;
 	}
-	~TeilorSeries()
+	~TaylorSeries()
 	{
 	}
-	TeilorSeries& operator=(const TeilorSeries& ob)
+	TaylorSeries& operator=(const TaylorSeries& ob)
 	{
 		n = ob.n;
 		x = ob.x;
 		function = ob.function;
 		return *this;
 	}
-	void SetCount(int _n)
+	TaylorSeries(const TaylorSeries &ob1)
 	{
-		n = _n;
+		x = ob1.x;
+		n = ob1.n;
+		function = ob1.function;
 	}
 	void SetFunction(int f)
 	{
 		function = f;
 	}
+	void SetCount(int _n)
+	{
+		n = _n;
+	}
 	void SetPoint(double _x)
 	{
 		x = _x;
+	}
+	int GetFunction(void)
+	{
+		return function;
+	}
+	int GetCount(void)
+	{
+		return n;
+	}
+	double GetPoint(void)
+	{
+		return x;
 	}
 	void Print()
 	{
@@ -130,29 +148,21 @@ public:
 		{
 		case 1:
 		{
-			cout << "Raznica= " << sin(x) - ResultOfFunctionEvaluation() << endl;
+			cout << "Difference with the standard= " << sin(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		case 2:
 		{
-			cout << "Raznica= " << cos(x) - ResultOfFunctionEvaluation() << endl;
+			cout << "Difference with the standard = " << cos(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		case 3:
 
 		{
-			cout << "Raznica= " << exp(x) - ResultOfFunctionEvaluation() << endl;
+			cout << "Difference with the standard= " << exp(x) - ResultOfFunctionEvaluation() << endl;
 			break;
 		}
 		}
-	}
-	int GetCount(void)
-	{
-		return n;
-	}
-	double GetPoint(void)
-	{
-		return x;
 	}
 	double ResultOfFunctionEvaluation()
 	{
@@ -200,28 +210,150 @@ public:
 };
 int main()
 {
-	int n = 0, x = 0, f, c;
-	TeilorSeries obj1;
-	cout << "Vvedite kolichestvo chlenov:" << endl;
-	cin >> n;
-	obj1.SetCount(n);
-	cout << "Vvedite tochku x:" << endl;
-	cin >> x;
-	obj1.SetPoint(x);
-	cout << "Viberite funkciyu:" << endl;
-	cout << "1.Sin(x)" << endl;
-	cout << "2.Cos(x)" << endl;
-	cout << "3.Exp(x)" << endl;
-	cin >> f;
-	obj1.SetFunction(f);
-	cout << "Resultat" << endl;
-	cout << obj1.ResultOfFunctionEvaluation() << endl;
-	cout << "Sravnim s etalonom" << endl;
-	obj1.Comparison();
-	cout << "Vvedite shlen, kotoriy hotite vichislit:'" << endl;
-	cin >> c;
-	cout << c << "Shlen=" << obj1.GetMemberOfSeries(c) << endl;
-	cout << "Formula:" << endl;
-	obj1.Print();
-	system("pause");
+	int n = 0;
+	int x = 0;
+	int m = 1;
+	int f, c, l;
+	TaylorSeries obj1;
+	while (m == 1)
+	{
+		cout << "Menu:" << endl;
+		cout << "1) Set the current function " << endl;
+		cout << "2) Get the current function " << endl;
+		cout << "3) Set number of elements " << endl;
+		cout << "4) Set the current number of members of the series " << endl;
+		cout << "5) Set the current number of members of the series" << endl;
+		cout << "6) Give the value of a given member of the series " << endl;
+		cout << "7) Ñalculate the value of the series in the fired point õ " << endl;
+		cout << "8) Output the deviation of the value of the series at the selected point from the reference value " << endl;
+		cout << "Enter: ";
+		cin >> l;
+		system("cls");
+		switch (l)
+		{
+		case 1:
+		{
+			cout << "Choose function \n" << endl;
+			cout << "1.Sin(x)" << endl;
+			cout << "2.Cos(x)" << endl;
+			cout << "3.Exp(x)" << endl;
+			cout << "Your choice: ";
+			cin >> f;
+			obj1.SetFunction(f);
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 2:
+		{
+			switch (obj1.GetFunction())
+			{
+			case 1:
+			{
+				cout << "Sin(x)" << endl;
+				break;
+			}
+			case 2:
+			{
+				cout << "Cos(x)" << endl;
+				break;
+			}
+			case 3:
+			{
+				cout << "Exp(x)" << endl;
+				break;
+			}
+			}
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 3:
+		{
+			cout << "Enter the number of members of the series: ";
+			cin >> n;
+			obj1.SetCount(n);
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 4:
+		{
+			cout << obj1.GetCount() << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 5:
+		{
+			cout << "Enter the number of members of the series: ";
+			cin >> n;
+			obj1.SetCount(n);
+			cout << "Formula: " << endl;
+			obj1.Print();
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 6:
+		{
+			cout << "Enter the number of members of the series: ";
+			cin >> n;
+			obj1.SetCount(n);
+			cout << "Enter the point x :";
+			cin >> x;
+			obj1.SetPoint(x);
+			cout << "Enter the member who you want to calculate : ";
+			cin >> c;
+			cout << c << "Member of series =" << obj1.GetMemberOfSeries(c) << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+
+		case 7:
+		{
+			cout << "Enter the number of members of the series: ";
+			cin >> n;
+			obj1.SetCount(n);
+			cout << "Enter the point x: ";
+			cin >> x;
+			obj1.SetPoint(x);
+			switch (obj1.GetFunction())
+			{
+			case 1:
+			{
+				cout << "Result\n" << obj1.ResultOfFunctionEvaluation() << endl;
+				break;
+			}
+			case 2:
+			{
+				cout << "Result\n" << obj1.ResultOfFunctionEvaluation() << endl;
+				break;
+			}
+			case 3:
+			{
+				cout << "Result\n" << obj1.ResultOfFunctionEvaluation() << endl;
+				break;
+			}
+			}
+			system("pause");
+			system("cls");
+			break;
+		}
+		case 8:
+		{
+			cout << "Enter the number of members of the series: ";
+			cin >> n;
+			obj1.SetCount(n);
+			cout << "Enter the point x :";
+			cin >> x;
+			obj1.SetPoint(x);
+			obj1.Comparison();
+			system("pause");
+			system("cls");
+			break;
+		}
+		}
+	}
 }
